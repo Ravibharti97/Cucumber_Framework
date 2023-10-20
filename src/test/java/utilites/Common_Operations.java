@@ -11,6 +11,7 @@ import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,14 +31,27 @@ public class Common_Operations {
 
 		return element;
 	}
-
-	public void clickElement(WebElement ele) {
-
-		ele.click();
+	
+	
+	public static void clearValue(WebDriver driver, By locator)
+	{
+		WebElement element= driver.findElement(locator);
+		element.clear();
+		
 	}
 
-	public void sendValue(WebElement ele, String value) {
-		ele.sendKeys(value);
+	public static void clickElement(WebDriver driver, By locator) {
+		
+      WebElement ele= driver.findElement(locator);
+      ele.click();
+		
+	}
+
+	public static void sendValue(WebDriver driver,By locator, String value) {
+		WebElement element=driver.findElement(locator);
+		element.sendKeys(value);
+		
+//		ele.sendKeys(value);
 
 	}
 
@@ -60,7 +74,8 @@ public class Common_Operations {
 		}
 	}
 
-	public static void scrollIntoView(WebDriver driver, WebElement element) {
+	public static void scrollIntoView(WebDriver driver, By lcator) {
+		WebElement element=driver.findElement(lcator);
 
 		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("arguments[0].scrollIntoView();", element);
@@ -88,6 +103,14 @@ public class Common_Operations {
 
 		}
 
+	}
+	
+	public static void selectByVisibleText(WebDriver driver, By locator,  String value) {
+		WebElement element= driver.findElement(locator);
+		Select sel=new Select(element);
+		sel.selectByVisibleText(value);
+		
+		
 	}
 
 }
